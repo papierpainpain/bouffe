@@ -1,0 +1,63 @@
+site_name: PapierBouffe
+site_url: https://bouffe.papierpain.fr
+site_description: Ici tu trouveras de la bouffe !!!
+site_author: Steven Gourves
+
+nav:
+    - Accueil: index.md
+    - Entrées/Apéritifs: entrees.md
+    - Plats:
+        - plats/plats.md
+        - Pâtes: plats/pates.md
+        - Tartes: plats/tartes.md
+        - Quiches/Cakes: plats/quiches.md
+    - Desserts: desserts.md
+
+theme:
+    name: material
+    #custom_dir: mkdocs-material/material
+    # 404 page
+    #static_templates:
+    #    - 404.html
+    # Necessary for search to work properly
+    #include_search_page: false
+    #search_index_only: true
+    # Default values, taken from mkdocs_theme.yml
+    language: fr
+    # font:
+    #     text: Roboto
+    #     code: Roboto Mono
+    favicon: images/wikipain.ico
+    logo: images/wikipain.svg
+    features:
+        - toc.integrate
+        - search.suggest
+        - search.highlight
+    prev_next_buttons_location: bottom
+    palette:
+        # Dark mode
+        - scheme: slate
+          primary: teal
+          accent: amber
+          toggle:
+            icon: material/weather-sunny
+            name: JOUUURRR
+        # Light mode
+        - scheme: default
+          primary: teal
+          accent: amber
+          toggle:
+            icon: material/weather-night
+            name: NUIIITTT
+
+markdown_extensions:
+    - admonition
+    - toc:
+        permalink: ⚓︎
+        toc_depth: 2
+
+plugins:
+    - search:
+        lang: fr
+
+copyright: Copyright &copy; 2020-2021 <a href="https://www.gourves-steven.fr">Steven Gourves</a>, Create with ❤.
