@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  app:
+    image: registry.papierpain.fr/labo/bouffe:${VERSION}
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        max_attempts: 3
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=cloud-public
+        - traefik.constraint-label=cloud-public
+        
+        ## HTTP ##
+        - traefik.http.routers.bouffe.entrypoints=web
+        - traefik.http.routers.bouffe.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.bouffe.middlewares=bouffe-redirect
+        # HTTP: middlewares
+        - traefik.http.middlewares.bouffe-redirect.redirectscheme.scheme=https
+        - traefik.http.middlewares.bouffe-redirect.redirectscheme.permanent=true
+        
+        ## HTTPS ##
+        - traefik.http.routers.bouffe-https.entrypoints=websecure
+        - traefik.http.routers.bouffe-https.rule=Host(`${DOMAIN?Variable not set}`)
+        - traefik.http.routers.bouffe-https.tls=true
+        - traefik.http.routers.bouffe-https.tls.certresolver=letsencrypt
+        - traefik.http.routers.bouffe-https.tls.options=default
+        
+        ## LOADBALANCER ##
+        - traefik.http.services.bouffe-https.loadbalancer.server.port=80
+    networks:
+      - cloud-public
+
+networks:
+  cloud-public:
+    external: true
