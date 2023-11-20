@@ -3,7 +3,7 @@
 ___
 ___
 
-## La maman de Julie (quiche)
+## Quiche
 
 ### Ingrédients
 
